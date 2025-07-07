@@ -5,10 +5,8 @@ require("dotenv").config();
 
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require('./routes/cart');
-
+const authRoutes = require('./routes/authRoutes'); // ✅ import
 const ordersRoutes = require('./routes/orders');
-
-
 
 const app = express();
 app.use(express.json());
@@ -20,16 +18,10 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use("/api/products", productRoutes);
 app.use('/api/users', require('./routes/users'));
-
-
-const authRoutes = require('./routes/authRoutes'); // ✅ import
-
 // ✅ Mount the auth routes
 app.use('/api/auth', authRoutes);
-
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', ordersRoutes);
-
 app.use('/api/admin/products', require('./routes/adminProducts'));
 app.use('/api/admin/orders', require('./routes/adminOrders'));
 app.use('/api/admin/users', require('./routes/adminUsers'));
